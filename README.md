@@ -1,6 +1,6 @@
 
 # SHAP (SHapley Additive exPlanations)
-#### Using SHAP to see feature contribution to the target variable
+#### Using SHAP to see the feature contribution to the target variable
 TreeExplainer works with any sklear tree-based model & XGBoost, LightGBM, CatBoost. See the documentation for other model based approaches. 
 
 Library documentation:   
