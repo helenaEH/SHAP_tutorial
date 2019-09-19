@@ -90,13 +90,13 @@ shap_values = explainer.shap_values(X)
 # shap force plot for the first prediction
 shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:])
 ```
-![png](plots/individual_observation)
+![png](plots/individual_observation.png)
 
 ```python
 # SHAP values for all predictions
 shap.force_plot(explainer.expected_value, shap_values, X)
 ```
-![png](plots/overall_plot)
+![png](plots/overall_plot.png)
 
 ```python
 # Effect of a single feature on the shap value,and automatically selected other feature to show dependence 
