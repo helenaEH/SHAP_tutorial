@@ -1,7 +1,7 @@
 
 # SHAP (SHapley Additive exPlanations)
 #### Using SHAP to see feature contribution to the target variable
-Works with any sklear tree-based model & XGBoost, LightGBM, CatBoost
+TreeExplainer works with any sklear tree-based model & XGBoost, LightGBM, CatBoost. See the documentation for other model based approaches. 
 
 Library documentation:   
 https://shap.readthedocs.io/en/latest/  
@@ -16,7 +16,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, cross_val_score
 ```
 
-### Load data into dataframe
+### Step 1. Load the data into a dataframe
 
 
 ```python
@@ -28,19 +28,7 @@ y = boston['target']
 ```
 
 
-```python
-# lists what we can extract from the sklearn toy dataset
-dir(boston) 
-```
-
-
-
-
-['DESCR', 'data', 'feature_names', 'filename', 'target']
-
-
-
-### Random Forest 
+### Step 2. Random Forest 
 
 
 ```python
@@ -92,6 +80,23 @@ print(f'Test score: {rf_test.round(4)}')
 shap.initjs()
 ```
 
+```python
+# Effect of a single feature on the shap value,and automatically selected other feature to show dependence 
+explainer = shap.TreeExplainer(rf_reg)
+shap_values = explainer.shap_values(X)
+```
+
+```python
+# shap force plot for the first prediction
+shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:])
+```
+![png](plots/individual_observation)
+
+```python
+# SHAP values for all predictions
+shap.force_plot(explainer.expected_value, shap_values, X)
+```
+![png](plots/overall_plot)
 
 ```python
 # Effect of a single feature on the shap value,and automatically selected other feature to show dependence 
