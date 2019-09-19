@@ -7,6 +7,11 @@ Library documentation:
 https://shap.readthedocs.io/en/latest/  
 https://github.com/slundberg/shap#citations
 
+Shapely values are based on the cooperative game theory. There is a trade off with machine learning model complexity vs interpretability. Simple models are easier to understand but they are often not as accurate atpredicting the target variable. More complicated models have a higer accuracy but they are nutorious of being 'black boxes' which makes understanding the outcome difficut. Python SHAP library is an easy to use visual library that facilitates our understanding about feature importance and impact direction (positive/negative) to our target variable both globally and for an individual observation. 
+
+```python
+!pip install SHAP
+```
 
 ```python
 import shap
@@ -38,6 +43,7 @@ Xtrain, Xtest, ytrain, ytest = train_test_split(X, y)
 
 
 ```python
+# Initiate and fit a Random Forest Regressor 
 rf_reg = RandomForestRegressor(n_estimators=100)
 rf_reg.fit(Xtrain, ytrain)
 ```
@@ -72,28 +78,28 @@ print(f'Test score: {rf_test.round(4)}')
     Test score: 0.7989
     
 
-### SHAP values
+### Step 3. SHAP values
 
 
 ```python
-# Initialize JavaScript visualization
+# Initialize JavaScript visualization - use Jupyter notebook to see the interactive features of the plots
 shap.initjs()
 ```
 
 ```python
-# Effect of a single feature on the shap value,and automatically selected other feature to show dependence 
+# Create a TreeExplainer and extract shap values from it - will be used for plotting later
 explainer = shap.TreeExplainer(rf_reg)
 shap_values = explainer.shap_values(X)
 ```
 
 ```python
-# shap force plot for the first prediction
+# shap force plot for the first prediction. Here we want to interpret the output value for the 1st observation in our dataframe. 
 shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:])
 ```
 ![png](plots/individual_observation.png)
 
 ```python
-# SHAP values for all predictions
+# SHAP values for all predictions and the direction of their impact
 shap.force_plot(explainer.expected_value, shap_values, X)
 ```
 ![png](plots/overall_plot.png)
@@ -109,7 +115,7 @@ shap.dependence_plot('AGE', shap_values, X)
 
 
 ```python
-# See how every feaure contributes to the model output
+# See the absolute shap value of how each feaure contributes to the model output
 shap.summary_plot(shap_values, X)
 ```
 
@@ -126,6 +132,7 @@ shap.summary_plot(shap_values, X, plot_type="bar")
 ![png](plots/SHAP_final_16_0.png)
 
 
+Feature and dataset description 
 
 ```python
 print(boston.DESCR)
