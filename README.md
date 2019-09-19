@@ -7,11 +7,11 @@ Library documentation:
 https://shap.readthedocs.io/en/latest/  
 https://github.com/slundberg/shap#citations
 
-Shapely values are based on the cooperative game theory. There is a trade off with machine learning model complexity vs interpretability. Simple models are easier to understand but they are often not as accurate atpredicting the target variable. More complicated models have a higer accuracy but they are nutorious of being 'black boxes' which makes understanding the outcome difficut. Python SHAP library is an easy to use visual library that facilitates our understanding about feature importance and impact direction (positive/negative) to our target variable both globally and for an individual observation. 
+Shapely values are based on the cooperative game theory. There is a trade off with machine learning model complexity vs interpretability. Simple models are easier to understand but they are often not as accurate at predicting the target variable. More complicated models have a higher accuracy, but they are notorious of being 'black boxes' which makes understanding the outcome difficult. Python SHAP library is an easy to use visual library that facilitates our understanding about feature importance and impact direction (positive/negative) to our target variable both globally and for an individual observation.
 
-```python
-!pip install SHAP
-```
+pip install shap  
+or   
+conda install -c conda-forge shap  
 
 ```python
 import shap
